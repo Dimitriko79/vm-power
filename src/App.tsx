@@ -3,7 +3,7 @@ import { Toaster } from "sonner";
 import "./index.css";
 import Dashboards from "./screens/dashboard/Dashboards.tsx";
 import Login from "./screens/login/Login.tsx";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import { useUserContext } from "./context/userProvider.tsx";
 import Sidebar from "./components/Sidebar.tsx";
 
@@ -12,6 +12,7 @@ const App = () => {
     const location = useLocation();
     const { state } = useUserContext();
     const { isSignedIn } = state;
+    const [isSideBarFocussed, setIsSideBarFocussed] = useState(false);
 
     useEffect(() => {
         if (!isSignedIn && location.pathname !== "/") {
@@ -29,11 +30,11 @@ const App = () => {
                 </h1>
                 <Routes>
                     <Route path="/" element={<Login />} />
-                    <Route path="/dashboard" element={<Dashboards />} />
+                    <Route path="/dashboard" element={<Dashboards isSideBarFocussed={isSideBarFocussed}/>} />
                 </Routes>
                 <Toaster position="top-right" theme="dark" />
             </main>
-            {isSignedIn && <Sidebar/>}
+            {isSignedIn && <Sidebar onSideBarFocussed={setIsSideBarFocussed}/>}
         </div>
     );
 };

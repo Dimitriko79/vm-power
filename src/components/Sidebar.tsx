@@ -7,8 +7,13 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import { useUserContext } from "../context/userProvider.tsx";
+import React from "react";
 
-const Sidebar = () => {
+type SidebarProps = {
+    onSideBarFocussed: (focused: boolean) => void;
+};
+
+const Sidebar: React.FC<SidebarProps> = ({onSideBarFocussed}) => {
     const location = useLocation();
     const { state, onLogout } = useUserContext();
     const { isSignedIn } = state;
@@ -24,7 +29,11 @@ const Sidebar = () => {
     ];
 
     return (
-        <div className="h-screen w-16 bg-gray-900 text-white flex flex-col justify-between mt-[88px] fixed top-0 left-0 z-50 shadow-lg">
+        <div
+            className="h-screen w-16 bg-gray-900 text-white flex flex-col justify-between mt-[88px] fixed top-0 left-0 z-50 shadow-lg"
+            onMouseEnter={() => onSideBarFocussed(true)}
+            onMouseLeave={() => onSideBarFocussed(false)}
+        >
             <nav className="flex flex-col gap-2 px-2 py-4">
                 {menuItems.filter(item => !!item).map(({ name, icon: Icon, path, onClick }) => {
                     const isActive = path && location.pathname === path;
@@ -33,8 +42,8 @@ const Sidebar = () => {
                         "group flex items-center h-12 px-3 gap-3 rounded-md relative",
                         "transition-all duration-300 overflow-hidden",
                         "hover:w-64",
-                        isActive ? "bg-gray-800" : "bg-gray-900",
-                        "hover:bg-gray-800"
+                        isActive ? "bg-gray-700" : "bg-gray-900",
+                        "hover:bg-gray-700"
                     );
 
                     const content = (
@@ -78,7 +87,11 @@ const Sidebar = () => {
                     }
 
                     return (
-                        <Link key={name} to={path!} className={commonClasses}>
+                        <Link
+                            key={name}
+                            to={path!}
+                            className={commonClasses}
+                        >
                             {content}
                         </Link>
                     );

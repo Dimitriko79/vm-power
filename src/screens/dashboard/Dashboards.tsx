@@ -8,7 +8,11 @@ import SyncButton from "../../components/SyncButton.tsx";
 import {useEffect} from "react";
 import {useDashboard} from "./useDashboard.ts";
 
-const Dashboards = () => {
+type DashboardsProps = {
+    isSideBarFocussed: boolean
+}
+
+const Dashboards: React.FC<DashboardsProps> = ({isSideBarFocussed}) => {
     const {
         options,
         vmName, setVmName,
@@ -43,7 +47,8 @@ const Dashboards = () => {
     }, []);
 
     return (
-        <div className="flex flex-col items-center justify-start min-h-screen px-4">
+        <div
+            className={`flex flex-col items-center justify-start min-h-screen px-4 transition-all duration-300 ${isSideBarFocussed && 'opacity-50'}`}>
             <div className="grid md:grid-cols-2 gap-6 w-full max-w-5xl">
                 <Card className="relative bg-gray-800">
                     {loading && (
