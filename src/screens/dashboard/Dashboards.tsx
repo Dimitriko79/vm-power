@@ -10,6 +10,7 @@ import {useDashboard} from "./useDashboard.ts";
 
 const Dashboards = () => {
     const {
+        options,
         vmName, setVmName,
         action, setAction,
         loading,
@@ -62,7 +63,7 @@ const Dashboards = () => {
                             showSuggestions={showSuggestions}
                             setShowSuggestions={setShowSuggestions}
                         />
-                        <ActionSelect value={action} setValue={setAction}/>
+                        <ActionSelect value={action} setValue={setAction} options={options}/>
                         <RunButton onClick={handleRun} loading={loading}>
                             Run
                         </RunButton>

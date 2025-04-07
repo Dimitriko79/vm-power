@@ -45,11 +45,18 @@ export const useDashboard = () => {
         }
     };
 
+    const options = [
+        {value: 'on', label: 'Power On'},
+        {value: 'off', label: 'Power Off'},
+        {value: 'reboot', label: 'Reboot'},
+    ];
+
     const handleClearHistory = () => {
         setHistory([]);
         localStorage.removeItem("vmHistory");
     };
     return {
+        options,
         vmName, setVmName,
         action, setAction,
         loading,

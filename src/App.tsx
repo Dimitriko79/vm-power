@@ -24,7 +24,7 @@ const App = () => {
     return (
         <div className="flex w-full min-h-screen bg-gray-900 text-white">
             <main className={`flex-1 ${isSignedIn && 'ml-20'} pr-6 pt-6 w-full flex-col`}>
-                <h1 className="text-4xl font-bold mb-10 text-center">
+                <h1 className="text-2xl xl:text-5xl md:text-4xl cm:text-3xl font-bold mb-10 text-center">
                     VM Power State Control
                 </h1>
                 <Routes>

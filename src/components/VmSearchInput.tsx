@@ -70,7 +70,7 @@ const VmSearchInput: React.FC<VmSearchInputProps> = ({
         }}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
-        className="bg-gray-700 border-none text-center"
+        className="bg-gray-700 border-none text-center text-gray-400"
       />
 
       {showSuggestions && suggestions.length > 0 && (

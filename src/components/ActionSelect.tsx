@@ -10,9 +10,11 @@ import {
 interface ActionSelectProps {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
+  options: {value: string, label: string}[]
 }
 
-const ActionSelect: React.FC<ActionSelectProps> = ({ value, setValue }) => {
+const ActionSelect: React.FC<ActionSelectProps> = ({ value, setValue, options }) => {
+
   return (
     <Select value={value} onValueChange={setValue}>
       <SelectTrigger className="bg-gray-700 border-none justify-center">
@@ -22,15 +24,15 @@ const ActionSelect: React.FC<ActionSelectProps> = ({ value, setValue }) => {
         />
       </SelectTrigger>
       <SelectContent className="bg-gray-800">
-        <SelectItem value="on" className="text-center">
-          Power On
-        </SelectItem>
-        <SelectItem value="off" className="text-center">
-          Power Off
-        </SelectItem>
-        <SelectItem value="reboot" className="text-center">
-          Reboot
-        </SelectItem>
+        {options.map((option, index) => (
+            <SelectItem
+                key={index}
+                value={option.value}
+                className="text-center bg-gray-700 hover:bg-gray-600 focus:bg-gray-600 data-[state=checked]:bg-gray-600"
+            >
+              {option.label}
+            </SelectItem>
+        ))}
       </SelectContent>
     </Select>
   );
