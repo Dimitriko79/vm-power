@@ -9,7 +9,7 @@ const Login = () => {
             <Button
                 onClick={handleLogin}
                 size="lg"
-                className="bg-gray-700 border-none text-center hover:bg-amber-50 hover:text-gray-900"
+                className="bg-gray-700 border-none text-center hover:bg-gray-400 hover:text-gray-900"
             >
                 Login
             </Button>

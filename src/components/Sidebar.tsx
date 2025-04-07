@@ -78,7 +78,10 @@ const Sidebar: React.FC<SidebarProps> = ({onSideBarFocussed}) => {
                         return (
                             <button
                                 key={name}
-                                onClick={onClick}
+                                onClick={() => {
+                                    onClick();
+                                    onSideBarFocussed(false);
+                                }}
                                 className={clsx(commonClasses, "text-left w-full")}
                             >
                                 {content}
@@ -90,6 +93,7 @@ const Sidebar: React.FC<SidebarProps> = ({onSideBarFocussed}) => {
                         <Link
                             key={name}
                             to={path!}
+                            onClick={() => onSideBarFocussed(false)}
                             className={commonClasses}
                         >
                             {content}

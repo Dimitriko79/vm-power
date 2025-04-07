@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Select,
   SelectTrigger,
@@ -14,10 +14,11 @@ interface ActionSelectProps {
 }
 
 const ActionSelect: React.FC<ActionSelectProps> = ({ value, setValue, options }) => {
+    const [open, setOpen] = useState(false)
 
   return (
-    <Select value={value} onValueChange={setValue}>
-      <SelectTrigger className="bg-gray-700 border-none justify-center">
+    <Select value={value} onValueChange={setValue} onOpenChange={setOpen}>
+      <SelectTrigger open={open} className="bg-gray-700 border-none justify-center">
         <SelectValue
           placeholder="Select action"
           className="w-full text-center"
