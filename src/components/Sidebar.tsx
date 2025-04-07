@@ -41,7 +41,7 @@ const Sidebar: React.FC<SidebarProps> = ({onSideBarFocussed}) => {
                     const commonClasses = clsx(
                         "group flex items-center h-12 px-3 gap-3 rounded-md relative",
                         "transition-all duration-300 overflow-hidden",
-                        "hover:w-64",
+                        "hover:w-[220px]",
                         isActive ? "bg-gray-700" : "bg-gray-900",
                         "hover:bg-gray-700"
                     );
