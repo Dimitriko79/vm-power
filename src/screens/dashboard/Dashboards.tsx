@@ -45,7 +45,7 @@ const Dashboards: React.FC<DashboardsProps> = ({isSideBarFocussed}) => {
             }
         }
     }, []);
-    console.log(2222, isSideBarFocussed)
+
     return (
         <div className={`flex flex-col items-center justify-start min-h-screen px-4 transition-all duration-300 ${isSideBarFocussed ? 'opacity-50' : 'opacity-100'}`}>
             <div className="grid md:grid-cols-2 gap-6 w-full max-w-5xl">
