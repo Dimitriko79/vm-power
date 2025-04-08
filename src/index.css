@@ -63,6 +63,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    background: rgb(17 24 39);
+    @apply text-foreground;
   }
 }

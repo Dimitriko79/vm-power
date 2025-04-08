@@ -30,11 +30,11 @@ const Sidebar: React.FC<SidebarProps> = ({onSideBarFocussed}) => {
 
     return (
         <div
-            className="h-screen w-16 bg-gray-900 text-white flex flex-col justify-between mt-[88px] fixed top-0 left-0 z-50 shadow-lg"
+            className="h-screen w-16 bg-gray-900 text-white flex flex-col justify-between pt-6 fixed top-0 left-0 z-50 shadow-lg"
             onMouseEnter={() => onSideBarFocussed(true)}
             onMouseLeave={() => onSideBarFocussed(false)}
         >
-            <nav className="flex flex-col gap-2 px-2 py-4">
+            <nav className="flex flex-col gap-2 px-2">
                 {menuItems.filter(item => !!item).map(({ name, icon: Icon, path, onClick }) => {
                     const isActive = path && location.pathname === path;
 
@@ -94,7 +94,10 @@ const Sidebar: React.FC<SidebarProps> = ({onSideBarFocussed}) => {
                             key={name}
                             to={path!}
                             onClick={() => onSideBarFocussed(false)}
-                            className={commonClasses}
+                            className={clsx(
+                                commonClasses,
+                                "appearance-none w-full"
+                            )}
                         >
                             {content}
                         </Link>
