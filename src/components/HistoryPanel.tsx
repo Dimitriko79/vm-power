@@ -1,4 +1,5 @@
 import React from "react";
+import {useUserContext} from "../context/userProvider.tsx";
 
 interface HistoryPanelProps {
   history: string[];
@@ -9,10 +10,11 @@ interface HistoryPanelProps {
 const HistoryPanel: React.FC<HistoryPanelProps> = ({
   history,
   setVmName,
-  clearHistory,
+  clearHistory
 }) => {
+    const {theme} = useUserContext();
   return (
-    <div className="bg-gray-800 p-6 rounded shadow text-center">
+    <div className={`p-6 rounded shadow text-center ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}>
       <h2 className="text-xl font-semibold mb-4">History</h2>
       {history.length > 0 ? (
         <div className="space-y-2">

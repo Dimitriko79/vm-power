@@ -17,6 +17,7 @@ const Sidebar: React.FC<SidebarProps> = ({onSideBarFocussed}) => {
     const location = useLocation();
     const { state, onLogout } = useUserContext();
     const { isSignedIn } = state;
+    const {theme, toggleTheme} = useUserContext();
 
     const menuItems = [
         { name: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
@@ -30,12 +31,12 @@ const Sidebar: React.FC<SidebarProps> = ({onSideBarFocussed}) => {
 
     return (
         <div
-            className="h-screen w-16 bg-gray-900 text-white flex flex-col justify-between pt-6 fixed top-0 left-0 z-50 shadow-lg"
+            className={`h-screen w-16 text-white flex flex-col justify-between pt-6 fixed top-0 left-0 z-50 shadow-lg ${theme === "dark" ? "bg-gray-900" : "bg-gray-900"}`}
             onMouseEnter={() => onSideBarFocussed(true)}
             onMouseLeave={() => onSideBarFocussed(false)}
         >
             <nav className="flex flex-col gap-2 px-2">
-                {menuItems.filter(item => !!item).map(({ name, icon: Icon, path, onClick }) => {
+                {menuItems.filter(item => !!item).map(({name, icon: Icon, path, onClick}) => {
                     const isActive = path && location.pathname === path;
 
                     const commonClasses = clsx(
@@ -49,7 +50,7 @@ const Sidebar: React.FC<SidebarProps> = ({onSideBarFocussed}) => {
                     const content = (
                         <>
                             <div className="min-w-[20px] mr-2 flex justify-center">
-                                <Icon size={20} />
+                                <Icon size={20}/>
                             </div>
                             {name !== "Profile" ? (
                                 <span
@@ -104,6 +105,21 @@ const Sidebar: React.FC<SidebarProps> = ({onSideBarFocussed}) => {
                     );
                 })}
             </nav>
+            <button
+                onClick={() => toggleTheme(theme === "dark" ? "light" : "dark")}
+                className="my-4 mx-2"
+            >
+                <div
+                    className="w-12 h-6 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 transition-colors duration-300">
+                    <div
+                        className={`transform transition-transform duration-300 w-4 h-4 rounded-full shadow-md flex items-center justify-center ${
+                            theme === "dark" ? "translate-x-6 bg-white" : "translate-x-0 bg-gray-700"
+                        }`}
+                    >
+                        {/*{theme === "dark" ? "🌙" : "🌞"}*/}
+                    </div>
+                </div>
+            </button>
         </div>
     );
 };

@@ -1,18 +1,20 @@
-import {Card, CardContent} from "../../components/ui/card.tsx";
-import {Loader2} from "lucide-react";
+import { Card, CardContent } from "../../components/ui/card.tsx";
+import { Loader2 } from "lucide-react";
 import VmSearchInput from "../../components/VmSearchInput.tsx";
 import ActionSelect from "../../components/ActionSelect.tsx";
 import RunButton from "../../components/RunButton.tsx";
 import HistoryPanel from "../../components/HistoryPanel.tsx";
 import SyncButton from "../../components/SyncButton.tsx";
-import {useEffect} from "react";
-import {useDashboard} from "./useDashboard.ts";
+import React, { useEffect } from "react";
+import { useDashboard } from "./useDashboard.ts";
+import clsx from "clsx";
+import {useUserContext} from "../../context/userProvider.tsx";
 
 type DashboardsProps = {
-    isSideBarFocussed: boolean
-}
+    isSideBarFocussed: boolean;
+};
 
-const Dashboards: React.FC<DashboardsProps> = ({isSideBarFocussed}) => {
+const Dashboards: React.FC<DashboardsProps> = ({ isSideBarFocussed }) => {
     const {
         options,
         vmName, setVmName,
@@ -24,6 +26,7 @@ const Dashboards: React.FC<DashboardsProps> = ({isSideBarFocussed}) => {
         handleRun,
         handleClearHistory
     } = useDashboard();
+    const {theme} = useUserContext();
 
     useEffect(() => {
         if (history.length > 0) {
@@ -47,18 +50,24 @@ const Dashboards: React.FC<DashboardsProps> = ({isSideBarFocussed}) => {
     }, []);
 
     return (
-        <div className={`flex flex-col items-center justify-start min-h-screen px-4 transition-all duration-300 ${isSideBarFocussed ? 'opacity-50' : 'opacity-100'}`}>
+        <div
+            className={clsx(
+                "flex flex-col items-center justify-start min-h-screen px-4 transition-all duration-300 w-full",
+                isSideBarFocussed ? "opacity-50" : "opacity-100"
+            )}
+        >
             <div className="grid md:grid-cols-2 gap-6 w-full max-w-5xl">
-                <Card className="relative bg-gray-800">
+                <Card className={clsx("relative", theme === "dark" ? "bg-gray-800" : "bg-white")}>
                     {loading && (
                         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20 rounded-md">
-                            <Loader2 className="w-10 h-10 animate-spin text-white"/>
+                            <Loader2 className="w-10 h-10 animate-spin text-white" />
                         </div>
                     )}
                     <CardContent
-                        className={`p-6 space-y-6 flex flex-col items-center ${
+                        className={clsx(
+                            "p-6 space-y-6 flex flex-col items-center",
                             loading ? "opacity-30 pointer-events-none" : ""
-                        }`}
+                        )}
                     >
                         <VmSearchInput
                             vmName={vmName}
@@ -74,7 +83,7 @@ const Dashboards: React.FC<DashboardsProps> = ({isSideBarFocussed}) => {
                     </CardContent>
                 </Card>
 
-                <Card className="bg-gray-800">
+                <Card className={clsx(theme === "dark" ? "bg-gray-800" : "bg-white")}>
                     <CardContent className="p-6 space-y-4 text-center">
                         <HistoryPanel
                             history={history}
@@ -86,7 +95,7 @@ const Dashboards: React.FC<DashboardsProps> = ({isSideBarFocussed}) => {
             </div>
 
             <div className="w-full flex justify-center mt-8">
-                <SyncButton/>
+                <SyncButton />
             </div>
         </div>
     );

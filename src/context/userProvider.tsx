@@ -3,7 +3,7 @@ import {
     useContext,
     useReducer,
     ReactNode,
-    Dispatch,
+    Dispatch, useState
 } from "react";
 import {
     userReducer,
@@ -16,7 +16,9 @@ interface UserContextType {
     state: UserState;
     dispatch: Dispatch<UserAction>;
     onLogin: () => void;
-    onLogout: () => void
+    onLogout: () => void,
+    theme: "light" | "dark";
+    toggleTheme: (value: "light" | "dark") => void;
 }
 
 const UserContext = createContext<UserContextType | null>(null);
@@ -35,6 +37,14 @@ interface ProviderProps {
 
 export const UserContextProvider = ({ children }: ProviderProps) => {
     const [state, dispatch] = useReducer(userReducer, initialUserState);
+    const [theme, setTheme] = useState<"light" | "dark">(() =>
+        localStorage.getItem("theme") === "light" ? "light" : "dark"
+    );
+
+    const toggleTheme = (value: "light" | "dark") => {
+        setTheme(value);
+        localStorage.setItem("theme", value);
+    }
 
     const onLogin = async () => {
         try {
@@ -55,7 +65,7 @@ export const UserContextProvider = ({ children }: ProviderProps) => {
     };
 
     return (
-        <UserContext.Provider value={{ state, dispatch, onLogin, onLogout }}>
+        <UserContext.Provider value={{ state, dispatch, onLogin, onLogout, theme, toggleTheme }}>
             {children}
         </UserContext.Provider>
     );
