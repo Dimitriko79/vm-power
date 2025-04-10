@@ -31,7 +31,7 @@ const Sidebar: React.FC<SidebarProps> = ({onSideBarFocussed}) => {
 
     return (
         <div
-            className={`h-screen w-16 text-white flex flex-col justify-between pt-6 fixed top-0 left-0 z-50 shadow-lg ${theme === "dark" ? "bg-gray-900" : "bg-gray-900"}`}
+            className={`h-screen w-16 text-white flex flex-col pt-6 fixed top-0 left-0 z-50 shadow-lg ${theme === "dark" ? "bg-gray-900" : "bg-white"}`}
             onMouseEnter={() => onSideBarFocussed(true)}
             onMouseLeave={() => onSideBarFocussed(false)}
         >
@@ -43,8 +43,13 @@ const Sidebar: React.FC<SidebarProps> = ({onSideBarFocussed}) => {
                         "group flex items-center h-12 px-3 gap-3 rounded-md relative",
                         "transition-all duration-300 overflow-hidden",
                         "hover:w-[220px]",
-                        isActive ? "bg-gray-700" : "bg-gray-900",
-                        "hover:bg-gray-700"
+                        theme === "dark"
+                            ? isActive
+                                ? "bg-gray-800 hover:bg-gray-700"
+                                : "bg-gray-900 hover:bg-gray-700"
+                            : isActive
+                                ? "bg-gray-400 text-white hover:bg-gray-700 "
+                                : "bg-white text-gray-700 hover:bg-gray-700 hover:text-white",
                     );
 
                     const content = (
@@ -68,7 +73,7 @@ const Sidebar: React.FC<SidebarProps> = ({onSideBarFocussed}) => {
                                         "opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                                     )}
                                 >
-                                    <p className="font-medium">David Levi</p>
+                                    <p className="font-medium text-white">David Levi</p>
                                     <p className="text-gray-400 text-xs">davidLevi35@gmail.com</p>
                                 </div>
                             )}
@@ -107,7 +112,7 @@ const Sidebar: React.FC<SidebarProps> = ({onSideBarFocussed}) => {
             </nav>
             <button
                 onClick={() => toggleTheme(theme === "dark" ? "light" : "dark")}
-                className="my-4 mx-2"
+                className="mx-2 fixed bottom-12"
             >
                 <div
                     className="w-12 h-6 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 transition-colors duration-300">

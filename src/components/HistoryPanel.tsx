@@ -14,7 +14,7 @@ const HistoryPanel: React.FC<HistoryPanelProps> = ({
 }) => {
     const {theme} = useUserContext();
   return (
-    <div className={`p-6 rounded shadow text-center ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}>
+    <div className={`p-6 rounded border border-input shadow text-center ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}>
       <h2 className="text-xl font-semibold mb-4">History</h2>
       {history.length > 0 ? (
         <div className="space-y-2">

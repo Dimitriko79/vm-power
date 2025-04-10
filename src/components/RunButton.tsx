@@ -18,7 +18,11 @@ const RunButton: React.FC<RunButtonProps> = ({
   return (
     <Button
       onClick={onClick}
-      className={`w-full justify-center border border-input ${theme === "dark" ? "bg-gray-700 text-black hover:bg-gray-900 hover:text-gray-700" : "bg-gray-400 text-gray-700 hover:bg-gray-700 hover:text-gray-400"}`}
+      className={
+      `w-full justify-center border border-input 
+      shadow-md hover:shadow-xl transition-all duration-300 ease-in-out 
+      ${theme === "dark" ? "bg-gray-700 text-black hover:bg-gray-900 hover:text-gray-700" : "bg-gray-700 text-gray-400 hover:bg-gray-900"}`
+    }
       disabled={loading}
     >
       {loading ? <Loader2 className="animate-spin" /> : children}

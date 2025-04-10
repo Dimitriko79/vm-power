@@ -20,7 +20,7 @@ const ActionSelect: React.FC<ActionSelectProps> = ({ value, setValue, options}) 
 
   return (
     <Select value={value} onValueChange={setValue} onOpenChange={setOpen}>
-      <SelectTrigger open={open} className={`border border-input justify-center ${theme === "dark" ? "bg-gray-700 text-black" : "bg-white"}`}>
+      <SelectTrigger open={open} className={`border border-input justify-center ${theme === "dark" ? "bg-gray-700 text-gray-400" : "bg-white"}`}>
         <SelectValue
           placeholder="Select action"
           className="w-full text-center"
